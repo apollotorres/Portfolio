@@ -22,6 +22,112 @@
         html {
             scroll-behavior: smooth;
         }
+
+        /* CSS DO CHATBOT */
+        #chat-container {
+            width: 100%; 
+            border-radius: 12px;
+            background-color: #ffffff;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            border: 1px solid #e5e7eb; /* Borda sutil */
+        }
+
+        .chat-header {
+            background-color: #4f46e5; /* Indigo-600 */
+            color: white;
+            padding: 12px 20px;
+            font-weight: bold;
+        }
+
+        #chat-messages {
+            flex-grow: 1;
+            padding: 20px;
+            height: 350px;
+            overflow-y: auto; 
+            background-color: #f9fafb; /* gray-50 */
+        }
+
+        .message {
+            margin-bottom: 15px;
+            padding: 10px 15px;
+            border-radius: 20px;
+            max-width: 85%;
+            line-height: 1.5;
+            clear: both;
+        }
+
+        .bot-message {
+            background-color: #e5e7eb; /* gray-200 */
+            color: #1f2937; /* gray-800 */
+            float: left;
+            text-align: left;
+        }
+
+        .user-message {
+            background-color: #4f46e5; /* Indigo-600 */
+            color: white;
+            float: right;
+            text-align: left;
+        }
+
+        #chat-form {
+            display: flex;
+            border-top: 1px solid #e5e7eb;
+            padding: 10px;
+            background-color: #ffffff;
+        }
+
+        #chat-input {
+            flex-grow: 1;
+            border: 1px solid #d1d5db;
+            border-radius: 20px;
+            padding: 10px 15px;
+            font-size: 14px;
+            outline: none;
+        }
+        #chat-input:focus {
+            border-color: #4f46e5;
+        }
+
+        #chat-form button {
+            background-color: #4f46e5;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            margin-left: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #chat-form button:hover {
+            background-color: #4338ca;
+        }
+
+        /* NOVO ESTILO PARA O BOTÃO DE DOWNLOAD */
+        .download-button {
+            display: inline-flex;
+            align-items: center;
+            margin-top: 10px;
+            padding: 10px 15px;
+            background-color: #3b82f6; /* blue-500 */
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.2s;
+        }
+        .download-button:hover {
+            background-color: #2563eb; /* blue-600 */
+        }
+        .download-button svg {
+            margin-right: 8px;
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
@@ -30,15 +136,16 @@
     <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
             <a href="#" class="text-2xl font-bold text-gray-900">AT.</a>
-            <ul class="flex items-center space-x-6">
+            <ul class="hidden md:flex items-center space-x-6">
                 <li><a href="#projetos" class="hover:text-indigo-600 transition-colors duration-300">Projetos</a></li>
                 <li><a href="#sobre" class="hover:text-indigo-600 transition-colors duration-300">Sobre</a></li>
+                <li><a href="#assistente" class="hover:text-indigo-600 transition-colors duration-300">Assistente AI</a></li>
                 <li><a href="#contato" class="bg-indigo-600 text-white px-4 py-2 rounded-lg shadow-md hover:bg-indigo-700 transition-all duration-300">Contato</a></li>
             </ul>
         </nav>
     </header>
 
-    <!-- SEÇÃO PRINCIPAL (HERO) -->
+    <!-- CONTEÚDO PRINCIPAL -->
     <main class="container mx-auto px-6 py-20 md:py-32 text-center">
         <h1 class="text-4xl md:text-6xl font-extrabold text-gray-900 leading-tight">
             Organização e eficiência para <span class="text-indigo-600">impulsionar resultados</span>.
@@ -58,91 +165,303 @@
         <div class="container mx-auto px-6">
             <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-900">Projetos Acadêmicos em Destaque</h2>
             <p class="text-center text-gray-600 mt-4 max-w-2xl mx-auto">Conheça os projetos que desenvolvi durante meu curso no Senac, aplicando na prática os conceitos de gestão, tecnologia e solução de problemas.</p>
-            
             <div class="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-                
-                <!-- PROJETO 1: FLOWFY -->
                 <div class="bg-gray-50 rounded-xl shadow-md overflow-hidden transform hover:-translate-y-2 transition-all duration-300 hover:shadow-xl">
                     <img class="w-full h-56 object-cover" src="https://i.imgur.com/j1ZZ8tA.jpeg" alt="Logo do projeto FlowFy">
                     <div class="p-6">
                         <h3 class="text-2xl font-bold text-gray-900">FlowFy - Gestor Financeiro</h3>
-                        <p class="mt-3 text-gray-600">
-                            Sistema de planejamento financeiro para PMEs e uso pessoal. Ajuda a organizar finanças com recursos como análise de notas fiscais via foto, definição de metas e orçamentos por categoria.
-                        </p>
-                        <div class="mt-6 flex space-x-4">
-                            <a href="https://lnk.ink/flowfy-app" target="_blank" rel="noopener noreferrer" class="font-semibold text-indigo-600 hover:text-indigo-800">Saber mais →</a>
-                        </div>
+                        <p class="mt-3 text-gray-600">Sistema de planejamento financeiro para PMEs e uso pessoal. Ajuda a organizar finanças com recursos como análise de notas fiscais via foto, definição de metas e orçamentos por categoria.</p>
+                        <div class="mt-6"><a href="https://lnk.ink/flowfy-app" target="_blank" rel="noopener noreferrer" class="font-semibold text-indigo-600 hover:text-indigo-800">Saber mais →</a></div>
                     </div>
                 </div>
-
-                <!-- PROJETO 2: PIRAFY -->
                 <div class="bg-gray-50 rounded-xl shadow-md overflow-hidden transform hover:-translate-y-2 transition-all duration-300 hover:shadow-xl">
                     <img class="w-full h-56 object-cover" src="https://i.imgur.com/KH7589C.png" alt="Logo do projeto PiraFy">
                     <div class="p-6">
                         <h3 class="text-2xl font-bold text-gray-900">PiraFy - Rede Social Educacional</h3>
-                        <p class="mt-3 text-gray-600">
-                            Micro rede social exclusiva para os alunos do Instituto Piravivo. A plataforma centraliza a comunicação e a organização, oferecendo um mural de avisos, controle de presença e a inovadora função de criar grupos de estudo.
-                        </p>
-                        <div class="mt-6 flex space-x-4">
-                           <a href="https://lnk.ink/Pirafy" target="_blank" rel="noopener noreferrer" class="font-semibold text-indigo-600 hover:text-indigo-800">Saber mais →</a>
-                        </div>
+                        <p class="mt-3 text-gray-600">Micro rede social exclusiva para os alunos do Instituto Piravivo. A plataforma centraliza a comunicação e a organização, oferecendo um mural de avisos, controle de presença e a inovadora função de criar grupos de estudo.</p>
+                        <div class="mt-6"><a href="https://lnk.ink/Pirafy" target="_blank" rel="noopener noreferrer" class="font-semibold text-indigo-600 hover:text-indigo-800">Saber mais →</a></div>
                     </div>
                 </div>
-
-                <!-- PROJETO 3: PÁGINA DE PROJETOS -->
                 <div class="bg-gray-50 rounded-xl shadow-md overflow-hidden transform hover:-translate-y-2 transition-all duration-300 hover:shadow-xl">
                     <img class="w-full h-56 object-cover" src="https://i.imgur.com/yd4C7vh.jpeg" alt="Logo do site de Projetos Integradores">
                     <div class="p-6">
                         <h3 class="text-2xl font-bold text-gray-900">Página de Projetos Integradores</h3>
-                        <p class="mt-3 text-gray-600">
-                            Desenvolvimento de uma página simples e direta para apresentar os projetos integradores da turma, detalhando o propósito e os resultados de cada trabalho acadêmico.
-                        </p>
-                        <div class="mt-6 flex space-x-4">
-                            <a href="https://lnk.ink/ProjetoIntegrador2025" target="_blank" rel="noopener noreferrer" class="font-semibold text-indigo-600 hover:text-indigo-800">Saber mais →</a>
-                        </div>
+                        <p class="mt-3 text-gray-600">Desenvolvimento de uma página simples e direta para apresentar os projetos integradores da turma, detalhando o propósito e os resultados de cada trabalho acadêmico.</p>
+                        <div class="mt-6"><a href="https://lnk.ink/ProjetoIntegrador2025" target="_blank" rel="noopener noreferrer" class="font-semibold text-indigo-600 hover:text-indigo-800">Saber mais →</a></div>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
     
     <!-- SEÇÃO SOBRE MIM -->
     <section id="sobre" class="py-20 md:py-28">
+        <div class="container mx-auto px-6"><div class="w-full max-w-3xl mx-auto text-center"><h2 class="text-3xl md:text-4xl font-bold text-gray-900">Sobre mim</h2><p class="mt-6 text-lg text-gray-600">Concluí o curso de Assistente Administrativo pelo Senac, onde adquiri uma base sólida em rotinas administrativas, planejamento, atendimento e uso de ferramentas de escritório.</p><p class="mt-4 text-lg text-gray-600">Sou uma pessoa proativa, organizada e com grande vontade de aprender e contribuir. Meus projetos demonstram minha capacidade de usar a criatividade e a tecnologia para resolver problemas práticos. Estou pronto para trazer dedicação e um novo olhar para os desafios da minha primeira experiência profissional.</p></div></div>
+    </section>
+
+    <!-- SEÇÃO DO CHATBOT ESTÁTICO -->
+    <section id="assistente" class="py-20 md:py-28 bg-gray-50">
         <div class="container mx-auto px-6">
-            <div class="w-full max-w-3xl mx-auto text-center">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Sobre mim</h2>
-                <p class="mt-6 text-lg text-gray-600">
-                    Concluí o curso de Assistente Administrativo pelo Senac, onde adquiri uma base sólida em rotinas administrativas, planejamento, atendimento e uso de ferramentas de escritório.
-                </p>
-                <p class="mt-4 text-lg text-gray-600">
-                   Sou uma pessoa proativa, organizada e com grande vontade de aprender e contribuir. Meus projetos demonstram minha capacidade de usar a criatividade e a tecnologia para resolver problemas práticos. Estou pronto para trazer dedicação e um novo olhar para os desafios da minha primeira experiência profissional.
-                </p>
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-900">Converse com meu Assistente</h2>
+            <p class="text-center text-gray-600 mt-4 max-w-2xl mx-auto">Tire suas dúvidas sobre minhas habilidades, projetos e formação de forma interativa. Este assistente é alimentado pela IA do Google.</p>
+            
+            <div class="mt-12 max-w-3xl mx-auto">
+                <div id="chat-container">
+                    <div class="chat-header">
+                        <h3>Assistente Virtual</h3>
+                    </div>
+                    <div id="chat-messages">
+                        <div class="message bot-message">
+                            <p>Olá! 👋 Sou uma assistente virtual criada pelo Apollo. Estou aqui para responder perguntas sobre suas habilidades e projetos. Como posso ajudar?</p>
+                        </div>
+                    </div>
+                    <form id="chat-form">
+                        <input type="text" id="chat-input" placeholder="Pergunte sobre o Apollo..." autocomplete="off" required>
+                        <button type="submit" aria-label="Enviar mensagem">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- SEÇÃO DE CONTATO -->
     <section id="contato" class="bg-white py-20 md:py-28">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Vamos conversar?</h2>
-            <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
-                Estou em busca da minha primeira oportunidade profissional e pronto para novos desafios. Se o meu perfil se encaixa na sua empresa, será um prazer marcarmos uma conversa!
-            </p>
-            <div class="mt-8">
-                <a href="mailto:apollotorres@outlook.com.br" class="inline-block bg-indigo-600 text-white text-xl font-semibold px-10 py-4 rounded-lg shadow-lg hover:bg-indigo-700 transform hover:scale-105 transition-all duration-300">
-                    Enviar um e-mail
-                </a>
-            </div>
-        </div>
+        <div class="container mx-auto px-6 text-center"><h2 class="text-3xl md:text-4xl font-bold text-gray-900">Vamos conversar?</h2><p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">Estou em busca da minha primeira oportunidade profissional e pronto para novos desafios. Se o meu perfil se encaixa na sua empresa, será um prazer marcarmos uma conversa!</p><div class="mt-8"><a href="mailto:apollotorres@outlook.com.br" class="inline-block bg-indigo-600 text-white text-xl font-semibold px-10 py-4 rounded-lg shadow-lg hover:bg-indigo-700 transform hover:scale-105 transition-all duration-300">Enviar um e-mail</a></div></div>
     </section>
 
     <!-- RODAPÉ -->
     <footer class="bg-gray-900 text-white py-6">
-        <div class="container mx-auto px-6 text-center">
-            <p>&copy; 2025 Apollo Torres. Todos os direitos reservados.</p>
-        </div>
+        <div class="container mx-auto px-6 text-center"><p>&copy; 2025 Apollo Torres. Todos os direitos reservados.</p></div>
     </footer>
 
+    <!-- JAVASCRIPT DO CHATBOT -->
+    <script>
+        const chatMessages = document.getElementById('chat-messages');
+        const chatForm = document.getElementById('chat-form');
+        const chatInput = document.getElementById('chat-input');
+
+        // MUDANÇA AQUI: Adicionada instrução sobre o comando de download
+        const systemPrompt = `
+Você é uma assistente virtual baseada em Inteligência Artificial, criada por Apollo Henrique Torres De Paula como parte de seu portfólio. Sua missão é representar Apollo com eficiência e simpatia, respondendo dúvidas sobre ele, seus projetos, experiências, formação e formas de contato.
+
+Você pode mencionar que é uma IA criada por ele — isso demonstra a habilidade técnica de Apollo e seu interesse por automação e inovação. Sempre que fizer sentido, valorize o fato de ter sido desenvolvida por ele.
+
+---
+
+###  Funções da assistente:
+
+• Dar boas-vindas ao visitante com simpatia e profissionalismo.  
+• Responder perguntas como:
+  - Quem é Apollo?
+  - Quais são seus projetos e qual foi seu papel em cada um?
+  - Ele já trabalhou com outras pessoas ou em equipe?
+  - Ele tem experiência profissional?
+  - Quais são suas habilidades, cursos e ferramentas?
+  - Ele está disponível para estágio ou projetos?
+  - Qual é seu estilo de trabalho e seus diferenciais?
+  - Como posso entrar em contato?
+  - Onde ele mora? (Se necessário para fins de logística de transporte)
+• Orientar a navegação no portfólio e fornecer o currículo em PDF.
+• **IMPORTANTE:** Quando o utilizador pedir o currículo, responda com uma frase introdutória seguida **EXATAMENTE** pela tag especial: **[ACTION:DOWNLOAD_CV]**. Exemplo: "Com certeza! Aqui está o currículo completo dele para download: [ACTION:DOWNLOAD_CV]".
+• Informar que ele ainda não teve experiência profissional formal, mas está preparado e motivado para iniciar sua primeira.
+• Quando necessário, explicar que Apollo pode estar em aula, mas você está disponível para ajudar.
+
+---
+
+###  Limites:
+
+• Só responda com base nas informações abaixo.  
+• Nunca invente dados ou experiências.  
+• Quando algo não estiver disponível, diga com educação e sugira entrar em contato com Apollo.
+
+---
+
+###  Sobre Apollo:
+
+**Nome completo:** Apollo Henrique Torres De Paula  
+**Idade:** 16 anos  
+**Cidade:** Osasco - SP  
+**Bairro:** Novo Osasco *(informação útil para RH avaliar viabilidade de deslocamento e vale-transporte)* **E-mail:** apollotorres@outlook.com.br  
+**WhatsApp:** (11) 95197-3097  
+**Currículo em PDF:** ./Curriculo_Apollo_Torres.pdf  
+**Horário escolar:** Das 14h30 às 21h30 (Ensino Médio Integral).  
+**Disponibilidade:** Está disponível para oportunidades de estágio, projetos ou atividades extracurriculares no período da manhã ou fins de semana.  
+**Experiência profissional:** Ainda não possui experiência formal, mas está pronto para sua primeira oportunidade no mercado de trabalho.
+
+---
+
+### Objetivos Profissionais:
+
+• Aprofundar seus conhecimentos em Inteligência Artificial, Desenvolvimento Web e Administração, buscando uma futura carreira na área de tecnologia e gestão.
+
+---
+
+###  Projetos de Destaque:
+
+**FlowFy** – Sistema de gestão financeira empresarial  
+• Controle de fluxo de caixa, orçamentos e análise de custos operacionais.  
+• Desenvolvido como parte de um projeto integrador, com foco em usabilidade empresarial.  
+• Apollo foi o responsável pela programação do sistema e realocação da base de dados.  
+•  Em manutenção até 30 de julho.  
+• [Ver projeto](https://lnk.ink/FlowFY)
+
+**Pirafy** – Rede social institucional escolar  
+• Chat entre alunos, controle de faltas, grupos de estudo.  
+• Projeto pessoal de Apollo. Ele foi responsável por todo o desenvolvimento (frontend e backend simulado).  
+• [Ver projeto](https://lnk.ink/Pirafy)
+
+**Site dos Projetos Integradores** • Página institucional para apresentar os projetos escolares da turma.  
+• Apollo contribuiu com a estrutura, organização visual e publicação online.  
+• [Ver site](https://lnk.ink/ProjetoIntegrador2025)
+
+---
+
+###  Formação:
+
+• Ensino Médio Integral – Término previsto: Dez/2026  
+• Assistente Administrativo – Senac – 160h  
+• Programação e Fundamentos Web – Udemy – 160h  
+• Pacote Office e Power BI – em andamento  
+• Inglês – Nível básico/intermediário
+
+---
+
+###  Habilidades:
+
+• Organização, responsabilidade e pontualidade  
+• Comunicação clara e trabalho em equipe  
+• Criatividade e proatividade na resolução de problemas  
+• Facilidade com ferramentas digitais  
+• Interesse em Inteligência Artificial e automação de processos  
+
+---
+
+###  Ferramentas e Tecnologias Utilizadas:
+
+• Node.js (básico)  
+• JavaScript  
+• HTML e CSS  
+• Notion  
+• Power BI (em aprendizado)  
+• Git e GitHub  
+• ChatGPT e Gemini (uso prático de IA)
+
+---
+
+###  Reconhecimentos:
+
+• Responsável pela programação do sistema FlowFy, destaque na apresentação do Projeto Integrador 2025.  
+• Reconhecido por professores pelo engajamento e ajuda aos colegas.
+
+---
+
+###  Estilo de Trabalho:
+
+• Trabalha bem em equipe  
+• Proativo na comunicação  
+• Facilidade para assumir responsabilidades  
+• Gosta de enfrentar novos desafios
+
+---
+
+###  Interesses Pessoais:
+
+• Tecnologia e automação  
+• Jogos de estratégia e lógica  
+• Comunicação visual  
+• Empreendedorismo
+
+---
+
+Finalize sempre com gentileza e esteja à disposição para esclarecer dúvidas. Mostre que Apollo é um jovem promissor, com atitude, curiosidade e sede de aprendizado.
+        `;
+
+        chatForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const userMessage = chatInput.value.trim();
+            if (!userMessage) return;
+
+            addMessage(userMessage, 'user');
+            chatInput.value = '';
+            addMessage('Digitando...', 'bot', true);
+
+            try {
+                const fullPrompt = `${systemPrompt}\n\nPERGUNTA DO USUÁRIO: "${userMessage}"\n\nSUA RESPOSTA PROFISSIONAL:`;
+                
+                const response = await fetch('/.netlify/functions/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ prompt: fullPrompt })
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.error || 'A resposta da função serverless falhou.');
+                }
+
+                const data = await response.json();
+                removeTypingIndicator();
+                addMessage(data.reply, 'bot');
+
+            } catch (error) {
+                console.error("Erro ao contatar a IA:", error);
+                removeTypingIndicator();
+                addMessage("Desculpe, ocorreu um erro de comunicação. Por favor, tente novamente mais tarde.", 'bot');
+            }
+        });
+
+        // MUDANÇA AQUI: Função 'addMessage' foi atualizada para criar o botão de download
+        function addMessage(text, sender, isTyping = false) {
+            const messageWrapper = document.createElement('div');
+            messageWrapper.style.overflow = 'auto';
+
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('message', `${sender}-message`);
+
+            if (isTyping) {
+                messageElement.id = 'typing-indicator';
+                messageElement.innerHTML = `<p class="text-xs">${text}</p>`;
+            } else if (sender === 'bot' && text.includes('[ACTION:DOWNLOAD_CV]')) {
+                // Se a mensagem do bot contém o comando de download
+                const introText = text.split('[ACTION:DOWNLOAD_CV]')[0].trim();
+                
+                if (introText) {
+                    const p = document.createElement('p');
+                    p.textContent = introText;
+                    messageElement.appendChild(p);
+                }
+
+                // Cria o botão de download
+                const downloadButton = document.createElement('a');
+                downloadButton.href = './Curriculo_Apollo_Torres.pdf';
+                downloadButton.setAttribute('download', 'Curriculo_Apollo_Torres.pdf');
+                downloadButton.setAttribute('target', '_blank');
+                downloadButton.classList.add('download-button');
+                downloadButton.innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                    <span>Download do Currículo (PDF)</span>
+                `;
+                messageElement.appendChild(downloadButton);
+            } else {
+                // Para todas as outras mensagens normais
+                const p = document.createElement('p');
+                p.textContent = text;
+                messageElement.appendChild(p);
+            }
+            
+            messageWrapper.appendChild(messageElement);
+            chatMessages.appendChild(messageWrapper);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function removeTypingIndicator() {
+            const typingIndicator = document.getElementById('typing-indicator');
+            if (typingIndicator) {
+                typingIndicator.parentElement.remove();
+            }
+        }
+    </script>
 </body>
 </html>
