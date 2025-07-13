@@ -56,7 +56,10 @@
             border-radius: 20px;
             max-width: 85%;
             line-height: 1.5;
-            clear: both;
+            /* CORREÇÃO APLICADA AQUI */
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            word-break: break-word;
         }
 
         .bot-message {
@@ -64,6 +67,7 @@
             color: #1f2937; /* gray-800 */
             float: left;
             text-align: left;
+            clear: both;
         }
 
         .user-message {
@@ -71,6 +75,7 @@
             color: white;
             float: right;
             text-align: left;
+            clear: both;
         }
 
         #chat-form {
@@ -108,8 +113,7 @@
         #chat-form button:hover {
             background-color: #4338ca;
         }
-
-        /* NOVO ESTILO PARA O BOTÃO DE DOWNLOAD */
+        
         .download-button {
             display: inline-flex;
             align-items: center;
@@ -242,7 +246,6 @@
         const chatForm = document.getElementById('chat-form');
         const chatInput = document.getElementById('chat-input');
 
-        // MUDANÇA AQUI: Adicionada instrução sobre o comando de download
         const systemPrompt = `
 Você é uma assistente virtual baseada em Inteligência Artificial, criada por Apollo Henrique Torres De Paula como parte de seu portfólio. Sua missão é representar Apollo com eficiência e simpatia, respondendo dúvidas sobre ele, seus projetos, experiências, formação e formas de contato.
 
@@ -412,11 +415,8 @@ Finalize sempre com gentileza e esteja à disposição para esclarecer dúvidas.
             }
         });
 
-        // MUDANÇA AQUI: Função 'addMessage' foi atualizada para criar o botão de download
         function addMessage(text, sender, isTyping = false) {
-            const messageWrapper = document.createElement('div');
-            messageWrapper.style.overflow = 'auto';
-
+            // MUDANÇA AQUI: Removi o 'messageWrapper' que era desnecessário
             const messageElement = document.createElement('div');
             messageElement.classList.add('message', `${sender}-message`);
 
@@ -424,7 +424,6 @@ Finalize sempre com gentileza e esteja à disposição para esclarecer dúvidas.
                 messageElement.id = 'typing-indicator';
                 messageElement.innerHTML = `<p class="text-xs">${text}</p>`;
             } else if (sender === 'bot' && text.includes('[ACTION:DOWNLOAD_CV]')) {
-                // Se a mensagem do bot contém o comando de download
                 const introText = text.split('[ACTION:DOWNLOAD_CV]')[0].trim();
                 
                 if (introText) {
@@ -433,7 +432,6 @@ Finalize sempre com gentileza e esteja à disposição para esclarecer dúvidas.
                     messageElement.appendChild(p);
                 }
 
-                // Cria o botão de download
                 const downloadButton = document.createElement('a');
                 downloadButton.href = './Curriculo_Apollo_Torres.pdf';
                 downloadButton.setAttribute('download', 'Curriculo_Apollo_Torres.pdf');
@@ -445,21 +443,19 @@ Finalize sempre com gentileza e esteja à disposição para esclarecer dúvidas.
                 `;
                 messageElement.appendChild(downloadButton);
             } else {
-                // Para todas as outras mensagens normais
                 const p = document.createElement('p');
                 p.textContent = text;
                 messageElement.appendChild(p);
             }
             
-            messageWrapper.appendChild(messageElement);
-            chatMessages.appendChild(messageWrapper);
+            chatMessages.appendChild(messageElement);
             chatMessages.scrollTop = chatMessages.scrollHeight;
         }
 
         function removeTypingIndicator() {
             const typingIndicator = document.getElementById('typing-indicator');
             if (typingIndicator) {
-                typingIndicator.parentElement.remove();
+                typingIndicator.remove();
             }
         }
     </script>
